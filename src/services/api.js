@@ -3,7 +3,9 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "http://localhost:8800/", // replace with your base API URL
+  //----use that url for local development--//
+  // "http://localhost:8800/",
+  baseURL: "https://backendwithdoc-hmdqjo3j.b4a.run/", // replace with your base API URL
   timeout: 5000, // optional timeout
 });
 
