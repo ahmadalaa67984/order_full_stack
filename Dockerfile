@@ -1,12 +1,13 @@
-# Use Node.js v14
-FROM node:14
+# Use Node.js v16 or higher
+FROM node:16
 
 # Create app directory
 WORKDIR /app
 
 # Install app dependencies
 COPY package*.json ./
-RUN npm install --production  # Install only production dependencies
+
+RUN npm install
 
 # Bundle app source
 COPY . .
@@ -14,5 +15,4 @@ COPY . .
 # Expose the port
 EXPOSE 8800
 
-# Start the application
 CMD [ "node", "index.js" ]
