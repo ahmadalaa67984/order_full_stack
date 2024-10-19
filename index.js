@@ -30,7 +30,7 @@ const limiter = rateLimit({
 // Apply the rate limiter to all requests
 
 mongoose
-  .connect("mongodb://localhost:27017/MoveiDatabase")
+  .connect("mongodb://https://backendwithdoc-hmdqjo3j.b4a.run//MoveiDatabase")
   .then(() => {
     console.log("dataBase is connected...");
   })
