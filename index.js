@@ -31,7 +31,7 @@ const limiter = rateLimit({
 
 mongoose
   .connect(
-    "mongodb+srv://nahmadalaa67984:mUZkd:NF9gJ7XDJ@cluster0.ukes3.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+    "mongodb+srv://nahmadalaa67984:ahmad@cluster0.ysc4m.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
   )
   .then(() => {
     console.log("dataBase is connected...");
