@@ -5,15 +5,21 @@ FROM node:14
 WORKDIR /app
 
 # Install app dependencies
-# A wildcard is used to ensure both package.json AND package-lock.json are copied
 COPY package*.json ./
+
+# Optional: Install build tools if needed
+RUN apt-get update && apt-get install -y build-essential
 
 RUN npm install
 
 # Bundle app source
 COPY . .
 
+# Optional: Clean npm cache
+RUN npm cache clean --force
+
 # Expose the port
 EXPOSE 8800
 
-CMD [ "node", "index.js" ]
+# Use ENTRYPOINT for better signal handling
+ENTRYPOINT ["node", "index.js"]
