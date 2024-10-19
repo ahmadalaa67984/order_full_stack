@@ -6,20 +6,13 @@ WORKDIR /app
 
 # Install app dependencies
 COPY package*.json ./
-
-# Optional: Install build tools if needed
-RUN apt-get update && apt-get install -y build-essential
-
-RUN npm install
+RUN npm install --production  # Install only production dependencies
 
 # Bundle app source
 COPY . .
 
-# Optional: Clean npm cache
-RUN npm cache clean --force
-
 # Expose the port
 EXPOSE 8800
 
-# Use ENTRYPOINT for better signal handling
-ENTRYPOINT ["node", "index.js"]
+# Start the application
+CMD [ "node", "index.js" ]
