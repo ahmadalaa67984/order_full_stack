@@ -43,17 +43,17 @@ const routes = [
     component: Register,
     meta: { requiresNotAuth: true },
   },
-  //   {
-  //     path: "/:catchAll(.*)",
-  //     redirect: "/pageNotFound",
-  //   },
+  {
+    path: "/:catchAll(.*)",
+    redirect: "/pageNotFound",
+  },
 ];
 
 // Create the router instance
-// const router = createRouter({
-//   history: createWebHistory(),
-//   routes,
-// });
+const router = createRouter({
+  history: createWebHistory(),
+  routes,
+});
 
 //--------------NOTE I COMMENTED OUT THE NAVIGATION GUARD TO ALLOW ACCESS TO THE ROUTES WITHOUT AUTHENTICATION FOR TESTING PURPOSES-----------------///
 
