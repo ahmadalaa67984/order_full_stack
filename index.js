@@ -16,10 +16,11 @@ app.use(express.json());
 
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: true, // Allow requests from any origin
     credentials: true, // If your frontend sends cookies, set credentials to true
   })
 );
+
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
   max: 100, // Limit each IP to 100 requests per windowMs
