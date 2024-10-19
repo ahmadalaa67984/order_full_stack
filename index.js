@@ -30,7 +30,9 @@ const limiter = rateLimit({
 // Apply the rate limiter to all requests
 
 mongoose
-  .connect("mongodb://https://backendwithdoc-hmdqjo3j.b4a.run//MoveiDatabase")
+  .connect(
+    "mongodb+srv://nahmadalaa67984:<db_password>@cluster0.ukes3.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+  )
   .then(() => {
     console.log("dataBase is connected...");
   })
