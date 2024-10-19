@@ -37,6 +37,7 @@ mongoose
     console.log("dataBase is connected...");
   })
   .catch((err) => console.log(err));
+
 app.use(limiter);
 
 app.use("/api/auth", authRoute);
