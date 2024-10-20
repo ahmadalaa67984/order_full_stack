@@ -87,6 +87,9 @@ const email = useField("email");
 const password = useField("password");
 const username = useField("username");
 
+const handleToggleRegister = () => {
+  router.push("/login");
+};
 const submit = handleSubmit(() => {
   handleRegister();
 });

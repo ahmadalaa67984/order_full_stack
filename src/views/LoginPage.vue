@@ -75,6 +75,9 @@ const { handleSubmit, handleReset } = useForm({
 const email = useField("email");
 const password = useField("password");
 
+const handleToggleRegister = () => {
+  router.push("/register");
+};
 const submit = handleSubmit(() => {
   handleLogin();
 });
