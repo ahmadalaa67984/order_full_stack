@@ -3,7 +3,7 @@ import { createVuetify } from "vuetify";
 
 const vuetify = createVuetify({
   theme: {
-    defaultTheme: localStorage.getItem("theme"), // Set the default theme
+    defaultTheme: localStorage.getItem("theme") || "dark", // Set the default theme
     themes: {
       light: {
         primary: "#1976D2",

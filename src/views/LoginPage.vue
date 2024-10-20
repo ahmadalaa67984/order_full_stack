@@ -49,10 +49,6 @@ import DOMPurify from "dompurify";
 import { authService } from "../services/authService";
 import api from "../services/api";
 
-const props = defineProps({
-  handleForceTest: Function,
-  handleToggleRegister: Function,
-});
 const store = useStore(); // Get the Vuex store instance
 const router = useRouter();
 
@@ -84,7 +80,12 @@ const submit = handleSubmit(() => {
 });
 
 // Computed properties to access Vuex state
-
+// Computed properties to access Vuex state
+const handleForceTest = () => {
+  store.dispatch("auth/loginTest").then(() => {
+    router.push("/dashboard");
+  });
+};
 // Handle the login action
 const handleLogin = async () => {
   store

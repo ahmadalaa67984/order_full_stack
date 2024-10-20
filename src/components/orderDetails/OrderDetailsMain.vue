@@ -12,7 +12,8 @@
     </div>
     <v-skeleton-loader
       v-if="loading"
-      height="240"
+      height="250"
+      max-width="500"
       type="image, list-item-two-line"
     >
     </v-skeleton-loader>

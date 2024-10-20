@@ -22,7 +22,7 @@
         type="password"
         variant="outlined"
       ></v-text-field>
-      <p v-if="error" class="text-red-400 text-xs">Invalid email or username</p>
+      <p v-if="error" class="text-red-700 text-xs">Invalid email or username</p>
       <div class="flex flex-col gap-1">
         <v-btn
           class="me-4"
@@ -55,10 +55,6 @@ import { authService } from "../services/authService";
 import api from "../services/api";
 import DOMPurify from "dompurify";
 
-const props = defineProps({
-  handleForceTest: Function,
-  handleToggleRegister: Function,
-});
 const store = useStore(); // Get the Vuex store instance
 const router = useRouter();
 
@@ -92,29 +88,44 @@ const password = useField("password");
 const username = useField("username");
 
 const submit = handleSubmit(() => {
-  handleLogin();
+  handleRegister();
 });
 
 // Computed properties to access Vuex state
-
+const handleForceTest = () => {
+  store.dispatch("auth/loginTest").then(() => {
+    router.push("/dashboard");
+  });
+};
 // Handle the login action
-const handleLogin = async () => {
-  store
-    .dispatch("auth/register", {
-      username: username.value.value,
-      email: email.value.value,
-      password: password.value.value,
-    })
-    .then(() => {
-      store
-        .dispatch("auth/login", {
-          email: DOMPurify.sanitize(email.value.value),
-          password: DOMPurify.sanitize(password.value.value),
-        })
-        .then(() => {
-          router.push("/dashboard");
-        });
+const handleRegister = async () => {
+  try {
+    // Attempt to register
+    const registerResponse = await store.dispatch("auth/register", {
+      username: DOMPurify.sanitize(username.value.value),
+      email: DOMPurify.sanitize(email.value.value),
+      password: DOMPurify.sanitize(password.value.value),
     });
+
+    // Check if registration was successful
+    if (!registerResponse || registerResponse.error) {
+      // Handle registration failure here (e.g., show an error message)
+      console.error("Registration failed:", registerResponse?.error);
+      return; // Stop here if registration fails
+    }
+
+    // If registration is successful, attempt login
+    await store.dispatch("auth/login", {
+      email: DOMPurify.sanitize(email.value.value),
+      password: DOMPurify.sanitize(password.value.value),
+    });
+
+    // If login is successful, navigate to the dashboard
+    router.push("/dashboard");
+  } catch (error) {
+    // Handle unexpected errors here
+    console.error("An error occurred during registration or login:", error);
+  }
 };
 </script>
 

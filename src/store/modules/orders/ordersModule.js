@@ -51,6 +51,7 @@ export const orderModule = {
     async fetchOrders({ commit }) {
       commit("SET_LOADING", true);
       commit("SET_ERROR", false);
+      commit("GET_ORDERS", []);
       try {
         const response = await orderService.fetchOrders();
         commit("GET_ORDERS", response.data);

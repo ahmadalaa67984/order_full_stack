@@ -12,25 +12,24 @@ const routes = [
     path: "/dashboard",
     name: "DashboardPage",
     component: DashBoardPage,
-    // meta: { requiresAuth: true },
+    meta: { requiresAuth: true },
   },
   {
     path: "/orders",
     name: "ordersPage",
     component: OrderPage,
-    // meta: { requiresAuth: true },
+    meta: { requiresAuth: true },
   },
   {
     path: "/order/:id",
     name: "orderDetail",
     component: OrderDetailsPage,
-    // meta: { requiresAuth: true },
+    meta: { requiresAuth: true },
   },
   {
     path: "/login",
     name: "login",
     component: LoginPage,
-    meta: { requiresNotAuth: true },
   },
   {
     path: "/pageNotFound",
@@ -41,11 +40,20 @@ const routes = [
     path: "/register",
     name: "register",
     component: Register,
-    meta: { requiresNotAuth: true },
   },
   {
     path: "/:catchAll(.*)",
-    redirect: "/pageNotFound",
+    redirect: (to) => {
+      // Check if the user is authenticated
+      const isAuthenticated = store.getters["auth/isAuthenticated"]; // Assuming you have an isAuthenticated getter in your Vuex store
+
+      // Redirect based on authentication status
+      if (isAuthenticated) {
+        return "/pageNotFound";
+      } else {
+        return "/login";
+      }
+    },
   },
 ];
 
@@ -59,11 +67,15 @@ const router = createRouter({
 
 // Navigation Guards: Protect routes that require authentication
 router.beforeEach((to, from, next) => {
-  const isAuthenticated = store.getters["auth/isAuthenticated"]; // Check if user is authenticated
-  if (to.meta.requiresNotAuth && isAuthenticated) {
-    next({ name: "DashboardPage" }); // Redirect to login if not authenticated
+  const isAuthenticated = store.getters["auth/isAuthenticated"];
+  if ((to.name === "login" || to.name === "register") && isAuthenticated) {
+    return next({ name: "DashboardPage" }); // Redirect to dashboard if authenticated
+  } // Check if user is authenticated
+  if (to.meta.requiresAuth && !isAuthenticated) {
+    next({ name: "login" }); // Redirect to login if not authenticated
   } else {
     next(); // Allow navigation
   }
 });
+
 export default router;

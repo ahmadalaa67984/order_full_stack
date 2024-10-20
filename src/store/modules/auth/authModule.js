@@ -58,6 +58,7 @@ export const authModule = {
         const response = await authService.register(credentials);
         console.log(response);
         commit("CLEAR_REG_ERR");
+        return response;
       } catch (error) {
         console.log(error);
 
@@ -66,6 +67,16 @@ export const authModule = {
     },
     logout({ commit }) {
       commit("LOGOUT");
+    },
+    async loginTest({ commit }) {
+      try {
+        commit(
+          "SET_TOKEN",
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3MTUxNzAyYTllZDExYTczZGUwNDJjNCIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE3Mjk0Mzc3NjMsImV4cCI6MTcyOTg2OTc2M30.9QJnvRBwS23TERqpSZyzcHYpWGzzRr7eTLGyH8-6SFM"
+        );
+      } catch (error) {
+        console.log(error);
+      }
     },
   },
   getters: {

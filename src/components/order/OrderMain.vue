@@ -5,7 +5,7 @@
       <h1 class="font-bold text-3xl">Orders</h1>
     </div>
     <div class="flex flex-wrap gap-2 py-2 items-center">
-      <div class="w-60">
+      <div class="w-32 md:w-60">
         <v-select
           label="filter by status"
           :items="['Pending', 'Paid', 'Canceled']"

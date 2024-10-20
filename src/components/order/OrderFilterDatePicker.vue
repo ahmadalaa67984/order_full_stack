@@ -10,7 +10,7 @@
               readonly
               v-bind="props"
               @click="dialog = true"
-              class="w-40"
+              class="w-20"
               variant="outlined"
             ></v-text-field>
           </template>
