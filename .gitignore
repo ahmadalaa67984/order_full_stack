@@ -1,0 +1,17 @@
+# Ignore all .log files
+*.log
+
+# Ignore the node_modules folder
+node_modules/
+
+# Ignore all .env files (for environment variables)
+.env
+
+# Ignore all files in the temp folder
+temp/
+
+# Ignore OS-specific files
+.DS_Store
+
+# Ignore compiled Python files
+*.pyc
