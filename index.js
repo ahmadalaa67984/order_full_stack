@@ -81,7 +81,7 @@ async function checkAppointment() {
 
 client.once("ready", () => {
   console.log(`🤖 Logged in as ${client.user.tag}`);
-  setInterval(checkAppointment, 3 * 60 * 1000); // every 3 minutes
+  setInterval(checkAppointment, 1 * 60 * 1000); // every 3 minutes
   checkAppointment(); // run immediately on start
 });
 
